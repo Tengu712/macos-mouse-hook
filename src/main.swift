@@ -136,13 +136,22 @@ func createEventTap() -> CFMachPort {
   return tap
 }
 
-func runCFRunLoop(tap: CFMachPort) {
+func setupStatusBar() {
+  let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
+  item.button?.image = NSImage(systemSymbolName: "cursorarrow.click.2", accessibilityDescription: nil)
+  let menu = NSMenu()
+  menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+  item.menu = menu
+}
+
+func runApp(tap: CFMachPort) {
   let runLoopSource = CFMachPortCreateRunLoopSource(kCFAllocatorDefault, tap, 0)
   CFRunLoopAddSource(CFRunLoopGetCurrent(), runLoopSource, .commonModes)
   CGEvent.tapEnable(tap: tap, enable: true)
-
-  CFRunLoopRun()
+  NSApplication.shared.run()
 }
 
 ensurePermission()
-runCFRunLoop(tap: createEventTap())
+NSApplication.shared.setActivationPolicy(.accessory)
+setupStatusBar()
+runApp(tap: createEventTap())
