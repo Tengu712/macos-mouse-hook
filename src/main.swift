@@ -138,9 +138,18 @@ func createEventTap() -> CFMachPort {
 
 func setupStatusBar() {
   let item = NSStatusBar.system.statusItem(withLength: NSStatusItem.squareLength)
-  item.button?.image = NSImage(systemSymbolName: "cursorarrow.click.2", accessibilityDescription: nil)
+  item.button?.image = NSImage(
+    systemSymbolName: "cursorarrow.click.2",
+    accessibilityDescription: nil
+  )
   let menu = NSMenu()
-  menu.addItem(NSMenuItem(title: "Quit", action: #selector(NSApplication.terminate(_:)), keyEquivalent: "q"))
+  menu.addItem(
+    NSMenuItem(
+      title: "Quit",
+      action: #selector(NSApplication.terminate(_:)),
+      keyEquivalent: "q"
+    )
+  )
   item.menu = menu
 }
 
