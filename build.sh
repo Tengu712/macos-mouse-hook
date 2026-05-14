@@ -4,6 +4,6 @@ set -euo pipefail
 
 mkdir -p MouseHook.app/Contents/MacOS
 
-swiftc src/main.swift -o MouseHook.app/Contents/MacOS/mouse-hook
+swiftc -o MouseHook.app/Contents/MacOS/mouse-hook src/*.swift
 
 cp Info.plist MouseHook.app/Contents
