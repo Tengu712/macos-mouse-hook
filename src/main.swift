@@ -60,6 +60,13 @@ func triggerRightMouseDown(location: CGPoint) {
 let eventCallback: CGEventTapCallBack = { proxy, type, event, _ in
   switch type {
   case .scrollWheel:
+    guard
+      event.getIntegerValueField(.scrollWheelEventScrollPhase) == 0,
+      event.getIntegerValueField(.scrollWheelEventMomentumPhase) == 0
+    else {
+      return Unmanaged.passRetained(event)
+    }
+
     let axis1 = event.getIntegerValueField(.scrollWheelEventPointDeltaAxis1)
     let axis2 = event.getIntegerValueField(.scrollWheelEventPointDeltaAxis2)
 

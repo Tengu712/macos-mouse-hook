@@ -12,6 +12,3 @@ A resident app that modifies mouse behavior on macOS.
 > [!NOTE]
 > Accessibility permission is required.
 > You will be prompted to grant permission on first launch.
-
-> [!WARNING]
-> Trackpad behavior is also affected.
