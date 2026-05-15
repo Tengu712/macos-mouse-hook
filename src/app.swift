@@ -33,7 +33,9 @@ final class AppDelegate: NSObject, NSApplicationDelegate {
         guard
             let button = item.button,
             let image = NSImage(
-                systemSymbolName: "cursorarrow.click.2", accessibilityDescription: nil)
+                systemSymbolName: "cursorarrow.click.2",
+                accessibilityDescription: nil
+            )
         else {
             fputs("warning: failed to set icon image.\n", stderr)
             return
