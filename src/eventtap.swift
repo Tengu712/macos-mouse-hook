@@ -5,10 +5,13 @@ private let scrollLines: Int32 = 3
 
 private var dragStartOrigin: CGPoint?
 private var eventTap: CFMachPort!
+private var isHookPaused = false
 
 private let eventCallback: CGEventTapCallBack = { proxy, type, event, _ in
     if type == .tapDisabledByTimeout || type == .tapDisabledByUserInput {
-        CGEvent.tapEnable(tap: eventTap, enable: true)
+        if !isHookPaused {
+            CGEvent.tapEnable(tap: eventTap, enable: true)
+        }
         return nil
     }
 
@@ -103,6 +106,11 @@ func createEventTap() -> CFMachPort {
 
     eventTap = tap
     return tap
+}
+
+func setEventTapEnabled(_ enabled: Bool) {
+    isHookPaused = !enabled
+    CGEvent.tapEnable(tap: eventTap, enable: enabled)
 }
 
 func cleanUp() {
