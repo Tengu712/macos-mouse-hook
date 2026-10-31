@@ -21,7 +21,7 @@ private let eventCallback: CGEventTapCallBack = { proxy, type, event, _ in
             event.getIntegerValueField(.scrollWheelEventScrollPhase) == 0,
             event.getIntegerValueField(.scrollWheelEventMomentumPhase) == 0
         else {
-            return Unmanaged.passRetained(event)
+            return Unmanaged.passUnretained(event)
         }
 
         let axis1 = event.getIntegerValueField(.scrollWheelEventPointDeltaAxis1)
@@ -38,7 +38,7 @@ private let eventCallback: CGEventTapCallBack = { proxy, type, event, _ in
                 wheel3: 0
             )
         else {
-            return Unmanaged.passRetained(event)
+            return Unmanaged.passUnretained(event)
         }
 
         return Unmanaged.passRetained(newEvent)
@@ -49,7 +49,7 @@ private let eventCallback: CGEventTapCallBack = { proxy, type, event, _ in
 
     case .rightMouseUp:
         guard let origin = dragStartOrigin else {
-            return Unmanaged.passRetained(event)
+            return Unmanaged.passUnretained(event)
         }
         dragStartOrigin = nil
 
@@ -81,7 +81,7 @@ private let eventCallback: CGEventTapCallBack = { proxy, type, event, _ in
         return nil
 
     default:
-        return Unmanaged.passRetained(event)
+        return Unmanaged.passUnretained(event)
     }
 }
 
